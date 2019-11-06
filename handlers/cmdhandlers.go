@@ -27,7 +27,7 @@ func NewCacheClient(host, username, password string) *CacheClient {
 		SetRetryWaitTime(time.Second)
 
 	return &CacheClient{
-		host:     host,
+		host:     "http://" + host,
 		username: username,
 		password: password,
 		client:   client,

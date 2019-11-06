@@ -59,6 +59,10 @@ func main() {
 	shell.AddCmd(&ishell.Cmd{
 		Name: "keys",
 		Help: "get all keys in cache",
+		LongHelp: `Get all keys
+Example:
+  keys
+`,
 		Func: cacheClient.Keys(),
 	})
 
@@ -68,17 +72,27 @@ func main() {
 	shell.AddCmd(&ishell.Cmd{
 		Name: "key",
 		Help: "get value for key (and internal key)",
+		LongHelp: `Get value for key (and internal key)
+Example:
+  key <key>
+`,
 		Func: cacheClient.Key(),
 	})
 
 	// Set or update value
 	// Examples:
 	// >>> set string new_key '{"value": "string_value", "ttl": 10000}'
-	// >>> set string planets '{"value": ["earth","jupiter","saturn"], "ttl": 10000}'
-	// >>> set string planets_map '{"value": ["earth":2220,"jupiter":3899,"saturn":23000], "ttl": 10000}'
+	// >>> set list planets '{"value": ["earth","jupiter","saturn"], "ttl": 10000}'
+	// >>> set dictionary planets_map '{"value": ["earth":2220,"jupiter":3899,"saturn":23000], "ttl": 10000}'
 	shell.AddCmd(&ishell.Cmd{
 		Name: "set",
 		Help: "set or update value",
+		LongHelp: `Set or update value
+Examples:
+  set string new_key '{"value": "string_value", "ttl": 10000}'
+  set string planets '{"value": ["earth","jupiter","saturn"], "ttl": 10000}'
+  set string planets_map '{"value": ["earth":2220,"jupiter":3899,"saturn":23000], "ttl": 10000}'
+`,
 		Func: cacheClient.Set(),
 	})
 
@@ -88,6 +102,10 @@ func main() {
 	shell.AddCmd(&ishell.Cmd{
 		Name: "remove",
 		Help: "remove key",
+		LongHelp: `Remove key
+Examples:
+  remove <key>
+`,
 		Func: cacheClient.Remove(),
 	})
 
