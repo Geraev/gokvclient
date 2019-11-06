@@ -17,9 +17,10 @@ type CacheClient struct {
 }
 
 var (
-	cyan = color.New(color.FgCyan).SprintFunc()
+	cyan    = color.New(color.FgCyan).SprintFunc()
 	boldRed = color.New(color.FgRed, color.Bold).SprintFunc()
 )
+
 func NewCacheClient(host, username, password string) *CacheClient {
 	client := resty.New().
 		SetDisableWarn(true).
@@ -53,7 +54,6 @@ func (c *CacheClient) SetLogin() func(c *ishell.Context) {
 	}
 }
 
-
 func (c *CacheClient) SetHost() func(c *ishell.Context) {
 	return func(ctx *ishell.Context) {
 		ctx.Println("Enter hostname and port")
@@ -81,8 +81,8 @@ func (c *CacheClient) Key() func(c *ishell.Context) {
 	return func(ctx *ishell.Context) {
 		req := c.getClient().NewRequest()
 		var (
-			resp *resty.Response
-			err error
+			resp             *resty.Response
+			err              error
 			key, internalKey string
 		)
 		switch len(ctx.Args) {
@@ -107,8 +107,8 @@ func (c *CacheClient) Set() func(c *ishell.Context) {
 	return func(ctx *ishell.Context) {
 		req := c.getClient().NewRequest()
 		var (
-			resp *resty.Response
-			err error
+			resp                *resty.Response
+			err                 error
 			vartype, key, value string
 		)
 		if len(ctx.Args) != 3 {
@@ -123,7 +123,7 @@ func (c *CacheClient) Set() func(c *ishell.Context) {
 		switch vartype {
 		case "string", "list", "dictionary":
 			req.SetBody(value).
-			SetHeader("Content-Type", "application/json")
+				SetHeader("Content-Type", "application/json")
 			resp, err = req.Put(fmt.Sprintf("cache/set/%s/%s", vartype, key))
 		default:
 			ctx.Println(boldRed("type error"))
@@ -141,8 +141,8 @@ func (c *CacheClient) Remove() func(c *ishell.Context) {
 		req := c.getClient().NewRequest()
 		var (
 			resp *resty.Response
-			err error
-			key string
+			err  error
+			key  string
 		)
 		key = ctx.Args[0]
 		resp, err = req.Delete(fmt.Sprintf("cache/remove/%s", key))
@@ -152,4 +152,3 @@ func (c *CacheClient) Remove() func(c *ishell.Context) {
 		ctx.Println(cyan(string(resp.Body())))
 	}
 }
-
