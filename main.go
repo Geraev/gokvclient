@@ -90,8 +90,8 @@ Example:
 		LongHelp: `Set or update value
 Examples:
   set string new_key '{"value": "string_value", "ttl": 10000}'
-  set string planets '{"value": ["earth","jupiter","saturn"], "ttl": 10000}'
-  set string planets_map '{"value": ["earth":2220,"jupiter":3899,"saturn":23000], "ttl": 10000}'
+  set list planets '{"value": ["earth","jupiter","saturn"], "ttl": 10000}'
+  set dictionary planets_map '{"value": ["earth":2220,"jupiter":3899,"saturn":23000], "ttl": 10000}'
 `,
 		Func: cacheClient.Set(),
 	})
